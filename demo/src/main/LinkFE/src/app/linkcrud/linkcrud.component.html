@@ -1,0 +1,49 @@
+<h1>ACORTADOR DE LINKS</h1>
+<h2>Lista de links acortados:
+  </h2>
+  <hr>
+  <div class="row">
+      <table >
+        <thead>
+          <tr class="col-sm">
+            <th>ID</th>
+            <th>linkName</th>
+            <th></th>
+            <th>newLink</th>
+    
+            
+          </tr>
+        </thead>
+        <tbody>
+          @for (link of links; track link.id) {
+          <tr class="col-sm">
+             
+            <td>{{ link.id }}</td>
+            <td>{{ link.linkName }}</td>
+            <td><button class="btn btn-outline-danger" (click)="deleteThisLinkById(link.id)">DELETE</button></td>
+            <td><a href="api/{{ link.newLink }}">{{ link.newLink }}</a></td>
+    
+           
+          </tr>
+      }
+      @empty{
+        <span>Vacío jefe xdddd</span>
+      }
+  
+        </tbody>
+      </table>
+
+  <button class="btn btn-outline-success" (click)="myDialog.show()">AÑADIR</button>
+  <dialog #myDialog>
+    <form [formGroup]="formGroup" (ngSubmit)="func()">
+        <label>GIVE ME A LINK!!!!</label><br>
+        <input type="text" id="linkName" 
+        class="form-control"  formControlName="linkName" required><br>
+        <label> HOW IT WOULD BE PLEASANT TO BE RENAMED?</label><br>
+        <input type="text" id="newLink"  formControlName="newLink" 
+        class="form-control"  required><br>
+        <button class="btn btn-outline-success"type="submit">OK</button>
+    </form>
+        <button class="btn btn-outline-danger" (click)="myDialog.close()">EXIT</button>
+ </dialog>
+
